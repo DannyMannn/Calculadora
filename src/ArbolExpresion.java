@@ -12,8 +12,7 @@ public class ArbolExpresion {
     ArrayList<String> arreglo;
     Stack<Float> pilaInt;
 
-    public ArbolExpresion(String expressionString)
-    {
+    public ArbolExpresion(String expressionString){
         enOrdenString = "";
         posOrdenString = "";
         preOrdenString = "";
@@ -23,8 +22,7 @@ public class ArbolExpresion {
         pilaInt=new Stack<Float>();
     }
 
-    public ArbolExpresion()
-    {
+    public ArbolExpresion(){
         enOrdenString = "";
         posOrdenString = "";
         preOrdenString = "";
@@ -38,13 +36,14 @@ public class ArbolExpresion {
         this.expressionString = expressionString;
     }
 
-    public void crearArbol()
-    {
+    public void crearArbol(){
+        //quita parentesis de cerradura para que sea mas facil trabajar la expresion
         expressionString = removeClosingParenthesis(expressionString);
-        System.out.println(expressionString.length());
+        //System.out.println(expressionString.length());
         int i = 0;
         Nodo nodoActual;
         Stack<Nodo> pilaNodo = new Stack<>();
+        //lo siguiente establece la raiz del arbol
         String aux = "" + expressionString.charAt(i);
         Nodo nodo = new Nodo(aux);
         pilaNodo.push(nodo);
@@ -52,44 +51,57 @@ public class ArbolExpresion {
         recorrer(expressionString, pilaNodo, nodoActual, i + 1);
     }
 
-    private void recorrer(String expresionString, Stack<Nodo> pilaNodo, Nodo nodoActual, int i)
-    {
+    private void recorrer(String expresionString, Stack<Nodo> pilaNodo, Nodo nodoActual, int i){
+        //Condicion de paro donde el índice es mayor a la longitud de la expresión
         if (i >= expresionString.length())
             return;
+        //Caracter que sera analizado como el token a trabajar
         Character token = expressionString.charAt(i);
+        //String que almacena el número p/e -7.01
         String auxString = "";
 
-        if(!isOperador(token))
-        {
+        //Esta condicion es para todos los caracteres que son números y sus componenetes (. , -)
+        //y también para los paréntesis de apertura
+        if(!isOperador(token)){
 
             //para números con más de un digito: los concata
-            if(Character.isDigit(token) || token == '.')
-            {
+            if(Character.isDigit(token) || token == '.'){
+                //caracter auxiliar para concatenar el numero completo
+                //como -6.021
                 Character tokenAux;
 
-                while(true)
-                {
+                //ciclo que concata el "." y los digitos que le siguen
+                while(true){
+                    //por si la expresion llega a mas de la longitud de
+                    //la expresion y para que no cause un null error
+                    //en la asignacion de tokenAux
                     if(i >= expresionString.length())
                         break;
                     tokenAux = expresionString.charAt(i);
 
-                    if(!Character.isDigit(tokenAux) && (tokenAux != '.'))
-                    {
+                    //significa que el caracter actual analizado no es un punto decimal
+                    //y tampoco es un digito por lo que se debe regresar al indice anterior
+                    //para que no se pierda el token en esta posicion
+                    //es decir, ya termino de concatener los componentes del numero
+                    if(!Character.isDigit(tokenAux) && (tokenAux != '.')){
                         i--;
                         break;
                     }
-                    else
-                    {
+                    //Aqui concata el "." o un digito y se incrementa el indice para ya no
+                    //tener que analizar este token en las siguientes iteraciones
+                    else{
                         auxString += tokenAux;
                         i++;
                     }
                 }
             }
-            else
-            {
+            //caso de parentesis de apertura
+            else{
                 auxString += token;
             }
 
+            //Lo que se debe hacer cuando es número
+            //o un paréntesis de apertura
             Nodo nodo = new Nodo(auxString);
 
             if(nodoActual.izquierdo == null)
@@ -97,17 +109,16 @@ public class ArbolExpresion {
             else
                 nodoActual.derecho = nodo;
 
-            if(isOpeningParenthesis(token))
-            {
+            if(isOpeningParenthesis(token)){
                 nodoActual = nodo;
                 pilaNodo.push(nodoActual);
             }
         }
-        else if(isOperador(token))
-        {
-            auxString += token;
+        //Lo que se debe hacer cuando el caracter es un operador(* / + - ^)
+        else if(isOperador(token)){
+            auxString += token;//aqui concata el operador a ""
             nodoActual = pilaNodo.pop();
-            nodoActual.setDato(auxString);
+            nodoActual.setDato(auxString);//reemplaza el parentesis con el operador
         }
 
         recorrer(expressionString,pilaNodo,nodoActual,i+1);
@@ -125,17 +136,14 @@ public class ArbolExpresion {
         return false;
     }
 
-    public boolean isOperador(Character c)
-    {
+    public boolean isOperador(Character c){
         if(c == '+' || c == '-' || c == '*' || c == '/' || c == '^')
             return true;
         return false;
     }
 
-    public void enOrden(Nodo n)
-    {
-        if (n!=null)
-        {
+    public void enOrden(Nodo n){
+        if (n!=null){
             enOrden(n.izquierdo);
             String aux = "  -->   "+(n.dato);
             System.out.print(aux);
@@ -144,10 +152,8 @@ public class ArbolExpresion {
         }
     }
 
-    public void preOrden(Nodo n)
-    {
-        if (n!=null)
-        {
+    public void preOrden(Nodo n){
+        if (n!=null){
             String aux = "  -->  "+(n.dato);
             System.out.print(aux);
             preOrdenString += aux;
@@ -156,10 +162,8 @@ public class ArbolExpresion {
         }
     }
 
-    public void posOrden(Nodo n)
-    {
-        if (n!=null)
-        {
+    public void posOrden(Nodo n){
+        if (n!=null){
             posOrden(n.izquierdo);
             posOrden(n.derecho);
             String aux = "  -->   "+(n.dato);
@@ -168,26 +172,21 @@ public class ArbolExpresion {
         }
     }
 
-    public String removeClosingParenthesis(String expression)
-    {
+    public String removeClosingParenthesis(String expression){
         String aux = "";
-        for(int i = 0; i < expression.length(); i++)
-        {
+        for(int i = 0; i < expression.length(); i++){
             if(!isClosingParenthesis(expression.charAt(i)) && !(expression.charAt(i) == ' '))
                 aux += expression.charAt(i);
         }
         return aux;
     }
 
-    public float evaluaExp()
-    {
+    public float evaluaExp(){
         float aux = 0;
         //System.out.print(arreglo);
-        for(int i=0;i<arreglo.size();i++)
-        {
+        for(int i=0;i<arreglo.size();i++){
             String stringNum = arreglo.get(i);
-            if (Character.isDigit(stringNum.charAt(0)))
-            {
+            if (Character.isDigit(stringNum.charAt(0))){
                 pilaInt.push(Float.parseFloat(stringNum));
             }
             else{
@@ -213,8 +212,7 @@ public class ArbolExpresion {
         return aux;
     }
 
-    public static void main(String args[])
-    {
+    public static void main(String args[]){
         String expression = "((((8/2)^2)+(10-(3+221)))*20)";
         String expression2 = "(1+(0))";//este formato seria aceptable?
         String expression3 = "{(1+2) - (1 + 5)}";
