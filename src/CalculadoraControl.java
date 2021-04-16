@@ -17,7 +17,7 @@ public class CalculadoraControl {
         public void actionPerformed(ActionEvent event){
             String a;
 
-            try {
+            //try {
                 a = vista.numField.field.getText();
                 if (vista.numberPad.numButtons[1].equals(event.getSource())) {
                     vista.numField.field.setText(a + 1);
@@ -103,10 +103,10 @@ public class CalculadoraControl {
                 if (vista.numberPad.menosUnarioButton.equals(event.getSource())) {
 
                 }
-            }catch (Exception e){//METER TODAS LAS EXCEPCIONES NECESARIAS
-                vista.displayErrors("ERROROROROR01010101");
-                System.out.println(e.getMessage());
-            }
+            //}catch (Exception e){//METER TODAS LAS EXCEPCIONES NECESARIAS
+                //vista.displayErrors("ERROROROROR01010101");
+              //  System.out.println(e.getLocalizedMessage());
+            //}
 
         }
     }

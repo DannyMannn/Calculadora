@@ -64,6 +64,11 @@ public class ArbolExpresion {
         //y también para los paréntesis de apertura
         if(!isOperador(token)){
 
+            /*
+            //Una implementacion que intenta incluir los parentesis unarios
+            if(Character.isDigit(token))
+                auxString += menosUnario(expresionString.charAt(i-1),i-1,expressionString);
+             */
             //para números con más de un digito: los concata
             if(Character.isDigit(token) || token == '.'){
                 //caracter auxiliar para concatenar el numero completo
@@ -115,13 +120,35 @@ public class ArbolExpresion {
             }
         }
         //Lo que se debe hacer cuando el caracter es un operador(* / + - ^)
-        else if(isOperador(token)){
+        //Lo que está comentado es para que el programa
+        //no se confunda con un menos unario
+        else if(isOperador(token) /*&& !isOpeningParenthesis(expresionString.charAt(i-1)) &&
+                !isOperador(expresionString.charAt(i-1))*/){
+            //System.out.println(i + " " + token);
             auxString += token;//aqui concata el operador a ""
             nodoActual = pilaNodo.pop();
+            //System.out.println(i + " " + auxString);
             nodoActual.setDato(auxString);//reemplaza el parentesis con el operador
         }
 
         recorrer(expressionString,pilaNodo,nodoActual,i+1);
+    }
+
+    public String menosUnario(Character token, int index, String expressionString){
+        /*
+        *Aqui se supone que solo es menor unario cuando cumple alguna de las siguientes condiciones:
+        * 1. Hay un signo menos que esta antes de parentesis de apertura o
+        * 2. Hay un signo menos que esta antes de un operador
+        * */
+        String menosUnario = "";
+        if(token == '-'){
+            Character auxToken = expressionString.charAt(index-1);
+            //System.out.println(auxToken);
+            if (isOperador(auxToken) || isOpeningParenthesis(auxToken)){
+                menosUnario = "-";
+            }
+        }
+        return menosUnario;
     }
 
     public boolean isOpeningParenthesis(Character c){
@@ -213,6 +240,7 @@ public class ArbolExpresion {
     }
 
     public static void main(String args[]){
+        /*
         String expression = "((((8/2)^2)+(10-(3+221)))*20)";
         String expression2 = "(1+(0))";//este formato seria aceptable?
         String expression3 = "{(1+2) - (1 + 5)}";
@@ -226,5 +254,8 @@ public class ArbolExpresion {
         //arbol.evaluaExp();
         arbol.preOrden(arbol.raiz);
         //System.out.println(20.121);
+
+         */
+        //System.out.println(Float.parseFloat("-4.23"));
     }
 }
