@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Stack;
-
+//import java.util.Math*;
 public class ArbolExpresion {
     Nodo raiz;
     String expressionString;
@@ -233,17 +233,18 @@ public class ArbolExpresion {
                         break;
                     case "/": aux=n2/n1;
                         break;
-                    case "^": //something
+                    case "^": aux = (float)(Math.pow(n2,n1));
                         break;
                 }
                 pilaNumeros.push(aux);
-
+                //( ((4-1)*(-1.321+4.32)) /2.22 )
             }
         }
         aux = pilaNumeros.pop();
         System.out.println("\n"+aux);
         return aux;
     }
+
 
     public static void main(String args[]){
         /*
