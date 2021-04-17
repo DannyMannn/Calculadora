@@ -9,9 +9,10 @@ public class Pad extends JPanel {
     public JButton masButton, menosButton, multButton, divButton;
     public JButton puntoButton, expButton;
     public JButton igualButton, parentesisIzq, parentesisDer, menosUnarioButton;
+    public JButton llaveIzq, llaveDer, corcheteIzq, corcheteDer;
 
     public Pad(){
-        this.setLayout(new GridLayout(5,5,5,5));
+        this.setLayout(new GridLayout(6,5,5,5));
         createButtons();
         addButtons();
         setButtonColor();
@@ -42,6 +43,12 @@ public class Pad extends JPanel {
         parentesisIzq = new JButton("(");
         parentesisDer = new JButton(")");
         menosUnarioButton = new JButton("(-)");
+
+        corcheteDer = new JButton("]");
+        corcheteIzq = new JButton("[");
+        llaveDer = new JButton("}");
+        llaveIzq = new JButton("{");
+
     }
 
     private void addButtons(){
@@ -74,6 +81,12 @@ public class Pad extends JPanel {
         add(infijoButton);
         add(sufijoButton);
         add(igualButton);
+
+        add(corcheteIzq);
+        add(corcheteDer);
+        add(llaveIzq);
+        add(llaveDer);
+
     }
 
     public void addListeners(ActionListener listenForActions){
@@ -126,5 +139,10 @@ public class Pad extends JPanel {
         parentesisIzq.setBackground(Color.WHITE);
         parentesisDer.setBackground(Color.WHITE);
         menosUnarioButton.setBackground(Color.WHITE);
+
+        corcheteIzq.setBackground(Color.WHITE);
+        corcheteDer.setBackground(Color.WHITE);
+        llaveIzq.setBackground(Color.WHITE);
+        llaveDer.setBackground(Color.WHITE);
     }
 }

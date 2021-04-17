@@ -1,4 +1,3 @@
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -9,8 +8,8 @@ public class ArbolExpresion {
     String posOrdenString;
     String preOrdenString;
 
-    ArrayList<String> arreglo;
-    Stack<Float> pilaInt;
+    ArrayList<String> arregloNumeros;
+    Stack<Float> pilaNumeros;
 
     public ArbolExpresion(String expressionString){
         enOrdenString = "";
@@ -18,8 +17,8 @@ public class ArbolExpresion {
         preOrdenString = "";
         this.raiz = null;
         this.expressionString = expressionString;
-        arreglo=new ArrayList<String>();
-        pilaInt=new Stack<Float>();
+        arregloNumeros =new ArrayList<String>();
+        pilaNumeros =new Stack<Float>();
     }
 
     public ArbolExpresion(){
@@ -28,8 +27,8 @@ public class ArbolExpresion {
         preOrdenString = "";
         this.raiz = null;
         this.expressionString = "";
-        arreglo=new ArrayList<String>();
-        pilaInt=new Stack<Float>();
+        arregloNumeros =new ArrayList<String>();
+        pilaNumeros =new Stack<Float>();
     }
 
     public void setExpressionString(String expressionString) {
@@ -64,11 +63,11 @@ public class ArbolExpresion {
         //y también para los paréntesis de apertura
         if(!isOperador(token)){
 
-            /*
+
             //Una implementacion que intenta incluir los parentesis unarios
             if(Character.isDigit(token))
                 auxString += menosUnario(expresionString.charAt(i-1),i-1,expressionString);
-             */
+
             //para números con más de un digito: los concata
             if(Character.isDigit(token) || token == '.'){
                 //caracter auxiliar para concatenar el numero completo
@@ -122,8 +121,8 @@ public class ArbolExpresion {
         //Lo que se debe hacer cuando el caracter es un operador(* / + - ^)
         //Lo que está comentado es para que el programa
         //no se confunda con un menos unario
-        else if(isOperador(token) /*&& !isOpeningParenthesis(expresionString.charAt(i-1)) &&
-                !isOperador(expresionString.charAt(i-1))*/){
+        else if(isOperador(token) && !isOpeningParenthesis(expresionString.charAt(i-1)) &&
+                !isOperador(expresionString.charAt(i-1))){
             //System.out.println(i + " " + token);
             auxString += token;//aqui concata el operador a ""
             nodoActual = pilaNodo.pop();
@@ -134,7 +133,7 @@ public class ArbolExpresion {
         recorrer(expressionString,pilaNodo,nodoActual,i+1);
     }
 
-    public String menosUnario(Character token, int index, String expressionString){
+    private String menosUnario(Character token, int index, String expressionString){
         /*
         *Aqui se supone que solo es menor unario cuando cumple alguna de las siguientes condiciones:
         * 1. Hay un signo menos que esta antes de parentesis de apertura o
@@ -195,7 +194,7 @@ public class ArbolExpresion {
             posOrden(n.derecho);
             String aux = "  -->   "+(n.dato);
             System.out.print(aux);
-            arreglo.add(n.dato);
+            arregloNumeros.add(n.dato);
         }
     }
 
@@ -210,16 +209,21 @@ public class ArbolExpresion {
 
     public float evaluaExp(){
         float aux = 0;
-        //System.out.print(arreglo);
-        for(int i=0;i<arreglo.size();i++){
-            String stringNum = arreglo.get(i);
-            if (Character.isDigit(stringNum.charAt(0))){
-                pilaInt.push(Float.parseFloat(stringNum));
+        System.out.print("El arregloNumeros: " + arregloNumeros);
+        for(int i = 0; i< arregloNumeros.size(); i++){
+            String stringNum = arregloNumeros.get(i);
+            //Condicion para numeros
+            //la primera posicion del numbero siempre debe ser un digito
+            //o bien, debe ser un (-) seguido por dígitos, por lo que
+            //el string (p/e -4.2) siempre debe ser mayor a 1.
+            if((stringNum.charAt(0) == '-' && stringNum.length() > 1)
+                    || Character.isDigit(stringNum.charAt(0))){
+                pilaNumeros.push(Float.parseFloat(stringNum));
             }
             else{
-                float n1=pilaInt.pop();
-                float n2=pilaInt.pop();
-                switch(arreglo.get(i))
+                float n1= pilaNumeros.pop();
+                float n2= pilaNumeros.pop();
+                switch(arregloNumeros.get(i))
                 {
                     case "*": aux=n1*n2;
                         break;
@@ -229,12 +233,14 @@ public class ArbolExpresion {
                         break;
                     case "/": aux=n2/n1;
                         break;
+                    case "^": //something
+                        break;
                 }
-                pilaInt.push(aux);
+                pilaNumeros.push(aux);
 
             }
         }
-        aux = pilaInt.pop();
+        aux = pilaNumeros.pop();
         System.out.println("\n"+aux);
         return aux;
     }
