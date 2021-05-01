@@ -65,12 +65,26 @@ public class CalculadoraControl {
                 if (vista.numberPad.puntoButton.equals(event.getSource())) {
                     vista.numField.field.setText(a + ".");
                 }
+
                 if (vista.numberPad.parentesisIzq.equals(event.getSource())) {
                     vista.numField.field.setText(a + "(");
                 }
                 if (vista.numberPad.parentesisDer.equals(event.getSource())) {
                     vista.numField.field.setText(a + ")");
                 }
+                if(vista.numberPad.corcheteIzq.equals(event.getSource())){
+                    vista.numField.field.setText(a + "[");
+                }
+                if(vista.numberPad.corcheteDer.equals(event.getSource())){
+                    vista.numField.field.setText(a + "]");
+                }
+                if(vista.numberPad.llaveIzq.equals(event.getSource())){
+                    vista.numField.field.setText(a + "{");
+                }
+                if(vista.numberPad.llaveDer.equals(event.getSource())){
+                    vista.numField.field.setText(a + "}");
+                }
+
                 if (vista.numberPad.expButton.equals(event.getSource())) {
                     vista.numField.field.setText(a + "^");
                 }
@@ -89,7 +103,8 @@ public class CalculadoraControl {
 
                 //HACER XD
                 if (vista.numberPad.prefijoButton.equals(event.getSource())) {
-
+                    /*modelo.setExpressionString(a);
+                    vista.numField.field.setText(modelo.preOrden());*/
                 }
 
                 if (vista.numberPad.infijoButton.equals(event.getSource())) {

@@ -110,8 +110,13 @@ public class Pad extends JPanel {
         expButton.addActionListener(listenForActions);
 
         igualButton.addActionListener(listenForActions);
+
         parentesisIzq.addActionListener(listenForActions);
         parentesisDer.addActionListener(listenForActions);
+        corcheteIzq.addActionListener(listenForActions);
+        corcheteDer.addActionListener(listenForActions);
+        llaveIzq.addActionListener(listenForActions);
+        llaveDer.addActionListener(listenForActions);
         menosUnarioButton.addActionListener(listenForActions);
     }
 

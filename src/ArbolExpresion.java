@@ -246,8 +246,8 @@ public class ArbolExpresion {
     }
 
 
-    public static void main(String args[]){
-        /*
+    /*public static void main(String args[]){
+
         String expression = "((((8/2)^2)+(10-(3+221)))*20)";
         String expression2 = "(1+(0))";//este formato seria aceptable?
         String expression3 = "{(1+2) - (1 + 5)}";
@@ -262,7 +262,7 @@ public class ArbolExpresion {
         arbol.preOrden(arbol.raiz);
         //System.out.println(20.121);
 
-         */
+
         //System.out.println(Float.parseFloat("-4.23"));
-    }
+    }*/
 }
