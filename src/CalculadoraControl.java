@@ -97,38 +97,22 @@ public class CalculadoraControl {
                 }
                 if (vista.numberPad.igualButton.equals(event.getSource())) {
                     modelo.setExpressionString(a);
-
-                    String aux = String.valueOf(modelo.calcularOperacion());
-                    vista.numField.field.setText(aux);
+                    vista.numField.field.setText(String.valueOf(modelo.calcularOperacion()));
                 }
 
                 //EVALUAR QUE PRIMERO TENGAN ALGO EN EL FIELD
                 if (vista.numberPad.prefijoButton.equals(event.getSource())) {
-                    vista.numField.field.setText("");
-                    /*String aux = modelo.getExpressionString();
-                    System.out.println("\naux prefix: "+aux);*/
-                    //modelo.setExpressionString(aux);
-                    String aux = modelo.preOrden();
-                    //System.out.println("preOrden: "+ aux);
+                    modelo.setExpressionString(modelo.getExpressionString());
                     vista.numField.field.setText(modelo.preOrden());
                 }
-
                 if (vista.numberPad.infijoButton.equals(event.getSource())) {
-                    String aux = modelo.getExpressionString();
-
-                    System.out.println("\naux infix: "+aux);
-                    modelo.setExpressionString(aux);
+                    modelo.setExpressionString(modelo.getExpressionString());
                     vista.numField.field.setText(modelo.enOrden());
                 }
-
                 if (vista.numberPad.sufijoButton.equals(event.getSource())) {
-                    //String aux = modelo.getExpressionString();
-                    //System.out.println("\npostFix "+aux);
-                    //modelo.setExpressionString(aux);
-                    //vista.numField.field.setText(modelo.posOrden());
-
+                    modelo.setExpressionString(modelo.getExpressionString());
+                    vista.numField.field.setText(modelo.posOrden());
                 }
-
                 if (vista.numberPad.menosUnarioButton.equals(event.getSource())) {
 
                 }

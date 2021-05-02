@@ -170,18 +170,14 @@ public class ArbolExpresion {
     public void enOrden(Nodo n){
         if (n!=null){
             enOrden(n.izquierdo);
-            String aux = "  -->   "+(n.dato);
-            System.out.print(aux);
-            enOrdenString += aux;
+            enOrdenString += "  -->   "+(n.dato);
             enOrden(n.derecho);
         }
     }
 
     public void preOrden(Nodo n){
         if (n!=null){
-            String aux = "  -->  "+(n.dato);
-            System.out.print(aux);
-            preOrdenString += aux;
+            preOrdenString += "  -->  "+(n.dato);
             preOrden(n.izquierdo);
             preOrden(n.derecho);
         }
@@ -191,8 +187,7 @@ public class ArbolExpresion {
         if (n!=null){
             posOrden(n.izquierdo);
             posOrden(n.derecho);
-            String aux = "  -->   "+(n.dato);
-            System.out.print(aux);
+            posOrdenString += "  -->   "+(n.dato);
             arregloNumeros.add(n.dato);
         }
     }
