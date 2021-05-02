@@ -102,15 +102,15 @@ public class CalculadoraControl {
 
                 //EVALUAR QUE PRIMERO TENGAN ALGO EN EL FIELD
                 if (vista.numberPad.prefijoButton.equals(event.getSource())) {
-                    modelo.setExpressionString(modelo.getExpressionString());
+                    modelo.setExpressionString(a);
                     vista.numField.field.setText(modelo.preOrden());
                 }
                 if (vista.numberPad.infijoButton.equals(event.getSource())) {
-                    modelo.setExpressionString(modelo.getExpressionString());
+                    modelo.setExpressionString(a);
                     vista.numField.field.setText(modelo.enOrden());
                 }
                 if (vista.numberPad.sufijoButton.equals(event.getSource())) {
-                    modelo.setExpressionString(modelo.getExpressionString());
+                    modelo.setExpressionString(a);
                     vista.numField.field.setText(modelo.posOrden());
                 }
                 if (vista.numberPad.menosUnarioButton.equals(event.getSource())) {
