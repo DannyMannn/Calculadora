@@ -16,7 +16,6 @@ public class CalculadoraControl {
     class ButtonsListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
             String a;
-
             //try {
                 a = vista.numField.field.getText();
                 if (vista.numberPad.numButtons[1].equals(event.getSource())) {
@@ -89,6 +88,7 @@ public class CalculadoraControl {
                     vista.numField.field.setText(a + "^");
                 }
                 if (vista.numberPad.acButton.equals(event.getSource())) {
+
                     vista.numField.field.setText("");
                 }
                 if (vista.numberPad.delButton.equals(event.getSource())) {
@@ -97,21 +97,35 @@ public class CalculadoraControl {
                 }
                 if (vista.numberPad.igualButton.equals(event.getSource())) {
                     modelo.setExpressionString(a);
+
                     String aux = String.valueOf(modelo.calcularOperacion());
                     vista.numField.field.setText(aux);
                 }
 
-                //HACER XD
+                //EVALUAR QUE PRIMERO TENGAN ALGO EN EL FIELD
                 if (vista.numberPad.prefijoButton.equals(event.getSource())) {
-                    /*modelo.setExpressionString(a);
-                    vista.numField.field.setText(modelo.preOrden());*/
+                    vista.numField.field.setText("");
+                    /*String aux = modelo.getExpressionString();
+                    System.out.println("\naux prefix: "+aux);*/
+                    //modelo.setExpressionString(aux);
+                    String aux = modelo.preOrden();
+                    //System.out.println("preOrden: "+ aux);
+                    vista.numField.field.setText(modelo.preOrden());
                 }
 
                 if (vista.numberPad.infijoButton.equals(event.getSource())) {
+                    String aux = modelo.getExpressionString();
 
+                    System.out.println("\naux infix: "+aux);
+                    modelo.setExpressionString(aux);
+                    vista.numField.field.setText(modelo.enOrden());
                 }
 
                 if (vista.numberPad.sufijoButton.equals(event.getSource())) {
+                    //String aux = modelo.getExpressionString();
+                    //System.out.println("\npostFix "+aux);
+                    //modelo.setExpressionString(aux);
+                    //vista.numField.field.setText(modelo.posOrden());
 
                 }
 

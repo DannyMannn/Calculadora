@@ -29,6 +29,10 @@ public class CalculadoraModelo {
         arbolExpresion.crearArbol();
     }
 
+    public String getExpressionString(){
+        return expressionString;
+    }
+
     public float calcularOperacion()
     {
         arbolExpresion.posOrden(arbolExpresion.raiz);
@@ -37,18 +41,21 @@ public class CalculadoraModelo {
 
     public String enOrden()
     {
+        arbolExpresion.enOrdenString="";//reseteando
         arbolExpresion.enOrden(arbolExpresion.raiz);
         return arbolExpresion.enOrdenString;
     }
 
     public String preOrden()
     {
+        arbolExpresion.preOrdenString="";
         arbolExpresion.preOrden(arbolExpresion.raiz);
         return arbolExpresion.preOrdenString;
     }
 
     public String posOrden()
     {
+        arbolExpresion.posOrdenString="";
         arbolExpresion.posOrden(arbolExpresion.raiz);
         return arbolExpresion.posOrdenString;
     }

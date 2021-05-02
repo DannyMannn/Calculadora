@@ -63,7 +63,6 @@ public class ArbolExpresion {
         //y también para los paréntesis de apertura
         if(!isOperador(token)){
 
-
             //Una implementacion que intenta incluir los parentesis unarios
             if(Character.isDigit(token))
                 auxString += menosUnario(expresionString.charAt(i-1),i-1,expressionString);
@@ -209,7 +208,7 @@ public class ArbolExpresion {
 
     public float evaluaExp(){
         float aux = 0;
-        System.out.print("El arregloNumeros: " + arregloNumeros);
+        System.out.print("\nEl arregloNumeros: " + arregloNumeros);
         for(int i = 0; i< arregloNumeros.size(); i++){
             String stringNum = arregloNumeros.get(i);
             //Condicion para numeros
@@ -245,24 +244,4 @@ public class ArbolExpresion {
         return aux;
     }
 
-
-    /*public static void main(String args[]){
-
-        String expression = "((((8/2)^2)+(10-(3+221)))*20)";
-        String expression2 = "(1+(0))";//este formato seria aceptable?
-        String expression3 = "{(1+2) - (1 + 5)}";
-        String expression4 = "{1+2 - 1 + 5}";//seria aceptable este formato?
-        String exp="((4+5)*((8.21/2.021)-2009.22))";
-        System.out.println("Original Expression Length: "+expression.length());
-        ArbolExpresion arbol = new ArbolExpresion(exp);
-        arbol.crearArbol();
-        //arbol.posOrden(arbol.raiz);
-        System.out.println();
-        //arbol.evaluaExp();
-        arbol.preOrden(arbol.raiz);
-        //System.out.println(20.121);
-
-
-        //System.out.println(Float.parseFloat("-4.23"));
-    }*/
 }
