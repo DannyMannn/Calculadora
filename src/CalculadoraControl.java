@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -99,6 +98,8 @@ public class CalculadoraControl {
                     vista.numField.field.setText(aux);
                 }
                 if (vista.numberPad.igualButton.equals(event.getSource())) {
+                    String aux = vista.numField.field.getText();
+                    modelo.equilibrioCorchetes.isBalanced(aux);
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
@@ -134,13 +135,9 @@ public class CalculadoraControl {
                 if (vista.numberPad.menosUnarioButton.equals(event.getSource())) {
 
                 }
-            }catch (CampoVacioExc e){//METER TODAS LAS EXCEPCIONES NECESARIAS
+            }catch (CampoVacioExc | OpValidaExc | CerraduraNoAperturaExc | NoCoincidenExc | PilaNoVaciaExc e){//METER TODAS LAS EXCEPCIONES NECESARIAS
                 vista.displayErrors(e.getMessage());
             }
-        catch (OpValidaExc e){
-            vista.displayErrors(e.getMessage());
-        }
-
         }
     }
 
