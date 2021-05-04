@@ -87,8 +87,8 @@ public class CalculadoraControl {
                     vista.numField.field.setText(a + "^");
                 }
                 if (vista.numberPad.acButton.equals(event.getSource())) {
-
                     vista.numField.field.setText("");
+                    modelo.resetArregloNumeros();
                 }
                 if (vista.numberPad.delButton.equals(event.getSource())) {
                     if (a.length()==0) {
@@ -103,9 +103,10 @@ public class CalculadoraControl {
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
-                        if (a.charAt(0)!='('&& a.charAt(0)!='['&& a.charAt(0)!='{'&& a.charAt(a.length()-1)!=')'&& a.charAt(a.length()-1)!=']'&& a.charAt(a.length()-1)!='}'){
-                            throw new OpValidaExc("Hacen falta simbolos de apertura y cerradura. ej: (2+5)");
-                        }
+                    if (a.charAt(0)!='('&& a.charAt(0)!='['&& a.charAt(0)!='{'&& a.charAt(a.length()-1)!=')'&& a.charAt(a.length()-1)!=']'&& a.charAt(a.length()-1)!='}'){
+                        throw new OpValidaExc("Hacen falta simbolos de apertura y cerradura. ej: (2+5)");
+                    }
+                    modelo.comprobarFormato(a); //comprueba el formato del field para que solo tenga numeros y los simbolos permitidos
                     modelo.setExpressionString(a);
                     vista.numField.field.setText(String.valueOf(modelo.calcularOperacion()));
                 }
@@ -115,6 +116,8 @@ public class CalculadoraControl {
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
+                    modelo.comprobarFormato(a);
+
                     modelo.setExpressionString(a);
                     vista.numField.field.setText(modelo.preOrden());
                 }
@@ -122,6 +125,8 @@ public class CalculadoraControl {
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
+                    modelo.comprobarFormato(a);
+
                     modelo.setExpressionString(a);
                     vista.numField.field.setText(modelo.enOrden());
                 }
@@ -129,13 +134,15 @@ public class CalculadoraControl {
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
+                    modelo.comprobarFormato(a);
+
                     modelo.setExpressionString(a);
                     vista.numField.field.setText(modelo.posOrden());
                 }
                 if (vista.numberPad.menosUnarioButton.equals(event.getSource())) {
 
                 }
-            }catch (CampoVacioExc | OpValidaExc | CerraduraNoAperturaExc | NoCoincidenExc | PilaNoVaciaExc e){//METER TODAS LAS EXCEPCIONES NECESARIAS
+            }catch (CampoVacioExc | OpValidaExc | CerraduraNoAperturaExc | NoCoincidenExc | PilaNoVaciaExc | FormatException e){//METER TODAS LAS EXCEPCIONES NECESARIAS
                 vista.displayErrors(e.getMessage());
             }
         }

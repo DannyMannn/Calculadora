@@ -1,3 +1,4 @@
+import java.util.regex.Pattern;
 public class CalculadoraModelo {
     //Comprobar que el txtfield solo tenga numeros,parentesis y operadores
     //Comprobar el orden de parentesis
@@ -28,7 +29,9 @@ public class CalculadoraModelo {
         arbolExpresion.setExpressionString(expressionString);
         arbolExpresion.crearArbol();
     }
-
+    public void resetArregloNumeros(){
+        arbolExpresion.arregloNumeros.clear();
+    }
     public String getExpressionString(){
         return expressionString;
     }
@@ -58,6 +61,13 @@ public class CalculadoraModelo {
         arbolExpresion.posOrdenString="";
         arbolExpresion.posOrden(arbolExpresion.raiz);
         return arbolExpresion.posOrdenString;
+    }
+    public void comprobarFormato(String expressionString)throws FormatException{
+
+        boolean formatNum = Pattern.matches("^[0-9[ (){}./*+^\\-\\[\\] ]]+$", expressionString);//union
+        if(!formatNum){
+            throw new FormatException();
+        }
     }
 
 }
