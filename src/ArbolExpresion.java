@@ -63,7 +63,7 @@ public class ArbolExpresion {
         //y también para los paréntesis de apertura
         if(!isOperador(token)){
 
-            //Una implementacion que intenta incluir los parentesis unarios
+            //Agrega el menos unario
             if(Character.isDigit(token))
                 auxString += menosUnario(expresionString.charAt(i-1),i-1,expressionString);
 
@@ -118,14 +118,10 @@ public class ArbolExpresion {
             }
         }
         //Lo que se debe hacer cuando el caracter es un operador(* / + - ^)
-        //Lo que está comentado es para que el programa
-        //no se confunda con un menos unario
         else if(isOperador(token) && !isOpeningParenthesis(expresionString.charAt(i-1)) &&
                 !isOperador(expresionString.charAt(i-1))){
-            //System.out.println(i + " " + token);
             auxString += token;//aqui concata el operador a ""
             nodoActual = pilaNodo.pop();
-            //System.out.println(i + " " + auxString);
             nodoActual.setDato(auxString);//reemplaza el parentesis con el operador
         }
 
@@ -203,7 +199,7 @@ public class ArbolExpresion {
 
     public float evaluaExp(){
         float aux = 0;
-        System.out.print("\nEl arregloNumeros: " + arregloNumeros);
+        //System.out.print("\nEl arregloNumeros: " + arregloNumeros);
         for(int i = 0; i< arregloNumeros.size(); i++){
             String stringNum = arregloNumeros.get(i);
             //Condicion para numeros
@@ -231,11 +227,10 @@ public class ArbolExpresion {
                         break;
                 }
                 pilaNumeros.push(aux);
-                //( ((4-1)*(-1.321+4.32)) /2.22 )
             }
         }
         aux = pilaNumeros.pop();
-        System.out.println("\n"+aux);
+        //System.out.println("\n"+aux);
         return aux;
     }
 
