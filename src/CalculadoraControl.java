@@ -139,9 +139,7 @@ public class CalculadoraControl {
                     modelo.setExpressionString(a);
                     vista.numField.field.setText(modelo.posOrden());
                 }
-                if (vista.numberPad.menosUnarioButton.equals(event.getSource())) {
 
-                }
             }catch (CampoVacioExc | OpValidaExc | CerraduraNoAperturaExc | NoCoincidenExc | PilaNoVaciaExc | FormatException e){//METER TODAS LAS EXCEPCIONES NECESARIAS
                 vista.displayErrors(e.getMessage());
             }
