@@ -1,6 +1,6 @@
-import java.util.*;
-import javax.swing.*;
-import java.awt.*;
+import Controls.CalculadoraControl;
+import GUI.CalculadoraVista;
+import Models.CalculadoraModelo;
 
 public class TestCalculadora {
 
