@@ -103,13 +103,14 @@ public class CalculadoraControl {
                     String aux = a.substring(0, a.length() - 1);
                     vista.numField.field.setText(aux);
                 }
+                boolean b = a.charAt(0) != '(' && a.charAt(0) != '[' && a.charAt(0) != '{' && a.charAt(a.length() - 1) != ')' && a.charAt(a.length() - 1) != ']' && a.charAt(a.length() - 1) != '}';
                 if (vista.numberPad.igualButton.equals(event.getSource())) {
                     String aux = vista.numField.field.getText();
                     modelo.equilibrioCorchetes.isBalanced(aux);
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
-                    if (a.charAt(0)!='('&& a.charAt(0)!='['&& a.charAt(0)!='{'&& a.charAt(a.length()-1)!=')'&& a.charAt(a.length()-1)!=']'&& a.charAt(a.length()-1)!='}'){
+                    if (b){
                         throw new OpValidaExc("Hacen falta simbolos de apertura y cerradura. ej: (2+5)");
                     }
                     modelo.comprobarFormato(a); //comprueba el formato del field para que solo tenga numeros y los simbolos permitidos
@@ -122,6 +123,9 @@ public class CalculadoraControl {
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
+                    if (b){
+                        throw new OpValidaExc("Hacen falta simbolos de apertura y cerradura. ej: (2+5)");
+                    }
                     modelo.comprobarFormato(a);
 
                     modelo.setExpressionString(a);
@@ -131,6 +135,9 @@ public class CalculadoraControl {
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
                     }
+                    if (b){
+                        throw new OpValidaExc("Hacen falta simbolos de apertura y cerradura. ej: (2+5)");
+                    }
                     modelo.comprobarFormato(a);
 
                     modelo.setExpressionString(a);
@@ -139,6 +146,9 @@ public class CalculadoraControl {
                 if (vista.numberPad.sufijoButton.equals(event.getSource())) {
                     if (a.length()==0) {
                         throw new CampoVacioExc("El campo esta vacio");
+                    }
+                    if (b){
+                        throw new OpValidaExc("Hacen falta simbolos de apertura y cerradura. ej: (2+5)");
                     }
                     modelo.comprobarFormato(a);
 

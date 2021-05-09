@@ -6,10 +6,6 @@ import Models.EquilibrioCorchetes;
 
 import java.util.regex.Pattern;
 public class CalculadoraModelo {
-    //Comprobar que el txtfield solo tenga numeros,parentesis y operadores
-    //Comprobar el orden de parentesis
-    //Mostrar tipo de error de parentesis
-    //Hacer el arbol (another class is suggested)
     public ArbolExpresion arbolExpresion;
     public EquilibrioCorchetes equilibrioCorchetes;
     public String expressionString;
