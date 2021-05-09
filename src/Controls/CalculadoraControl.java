@@ -149,6 +149,10 @@ public class CalculadoraControl {
             }catch (CampoVacioExc | OpValidaExc | CerraduraNoAperturaExc | NoCoincidenExc | PilaNoVaciaExc | FormatException e){//METER TODAS LAS EXCEPCIONES NECESARIAS
                 vista.displayErrors(e.getMessage());
             }
+            catch (Exception e){
+                vista.displayErrors("Por favor ingrese el formato correcto.");
+                modelo.resetArregloNumeros();
+            }
         }
     }
 
